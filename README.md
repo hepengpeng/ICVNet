@@ -1,7 +1,7 @@
 <!-- <br />
 
 <div align="center">
-  <h1 align="center">ICV-Net: Identity Cost Volume Network for Multi-View Stereo Depth Inference</h1>
+  <h1 align="center">ICV-Net: An Identity Cost Volume Network for Multi-View Stereo Depth Inference</h1>
   <p align="center">
     Pengpeng He<sup>1</sup></a>,
     Yueju Wang<sup>2</sup></a>,
