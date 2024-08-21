@@ -1,0 +1,144 @@
+output_dir: "/mvs/test/tanks/ICV-Net/advanced"
+true_gpu: "0"
+gpu: [0]
+random_seed: 0
+auto_resume: True
+master_port: "11322"
+model_file: "icvnet_clean"
+model_name: "ICVNet"
+test_func_name: "test_model_stage_profile"
+dataset: "general_eval"
+max_depth: 4
+model_path: "ckpt/blended.ckpt"
+data_name: "tanks"
+img_mean: [0.5, 0.5, 0.5]
+img_std: [0.5, 0.5, 0.5]
+
+model:
+  is_stage: True
+  stage_num: 4
+  output_channels: [64, 32, 16, 8]
+  group_nums: [8, 8, 8, 4]
+  feat_name: "StageFeatExtNet"
+  use_3dbn: True
+  stage_info:
+    scale:
+      "0": 0.125
+      "1": 0.25
+      "2": 0.5
+      "3": 1.0
+    depth2stage:
+      "1": 0
+      "2": 1
+      "3": 2
+      "4": 3
+      "5": 3 # needed and invalid, just for checking
+
+test:
+  batch_size: 1
+  log_period: 20
+  test_metric: "thres1mm_accu"
+
+data:
+  num_workers: 4
+  test:
+    root_dir: "/dataset/TankandTemples/advanced"
+    num_view: 7
+    interval_scale: 1.0 # disabled for advanced
+    num_depth: 512 # disabled for advanced
+    listfile: "lists/tanks/tanks_advanced.txt"
+    out_scale: 1.0
+    self_norm: False
+    color_mode: null
+    with_gt: False
+    max_h: null
+    max_w: null
+    base_image_size: 64
+    use_cam_max: True # disable num_depth and interval_scale
+    is_clean: True
+    out_depths: [4]
+    prob_out_depths: [1, 2, 3, 4]
+    save_depths: [4]
+    prob_depth: [2, 3, 4]
+
+#no_testing: True
+
+fusion:
+  name: "xy_filter_per"
+  xy_filter_per:
+    nprocs: null
+    global_pair: False
+    para_num: 1
+    para_tag: [0]
+    output_dir: "/mvs/test/tanks/ICV-Net/advanced/xy_filter"
+    Family:
+      prob_threshold: [0.70]
+      num_consistent: [5]
+      img_dist_thresh: [2.0]
+      depth_thresh: [0.005]
+    Francis:
+      prob_threshold: [0.70]
+      num_consistent: [6]
+      img_dist_thresh: [2.0]
+      depth_thresh: [0.005]
+    Horse:
+      prob_threshold: [0.7]
+      num_consistent: [3]
+      img_dist_thresh: [4.0]
+      depth_thresh: [0.02]
+    Lighthouse:
+      prob_threshold: [0.6]
+      num_consistent: [3]
+      img_dist_thresh: [4.0]
+      depth_thresh: [0.02]
+    M60:
+      prob_threshold: [0.8]
+      num_consistent: [4]
+      img_dist_thresh: [2.0]
+      depth_thresh: [0.005]
+    Panther:
+      prob_threshold: [0.8]
+      num_consistent: [4]
+      img_dist_thresh: [2.5]
+      depth_thresh: [0.01]
+    Playground:
+      prob_threshold: [0.8]
+      num_consistent: [5]
+      img_dist_thresh: [3.0]
+      depth_thresh: [0.005]
+    Train:
+      prob_threshold: [0.85]
+      num_consistent: [5]
+      img_dist_thresh: [2.5]
+      depth_thresh: [0.0075]
+
+    Auditorium:
+      prob_threshold: [0.5]
+      num_consistent: [1]
+      img_dist_thresh: [3.0]
+      depth_thresh: [0.02]
+    Ballroom:
+      prob_threshold: [0.6]
+      num_consistent: [2]
+      img_dist_thresh: [3.0]
+      depth_thresh: [0.02]
+    Courtroom:
+      prob_threshold: [0.5]
+      num_consistent: [2]
+      img_dist_thresh: [3.0]
+      depth_thresh: [0.02]
+    Museum:
+      prob_threshold: [0.6]
+      num_consistent: [2]
+      img_dist_thresh: [3.0]
+      depth_thresh: [0.02]
+    Palace:
+      prob_threshold: [0.6]
+      num_consistent: [3]
+      img_dist_thresh: [2.5]
+      depth_thresh: [0.015]
+    Temple:
+      prob_threshold: [0.7]
+      num_consistent: [3]
+      img_dist_thresh: [2.5]
+      depth_thresh: [0.015]

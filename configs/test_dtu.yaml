@@ -1,0 +1,182 @@
+output_dir: "/mvs/test/dtu/ICV-Net"
+true_gpu: "0"
+gpu: [0]
+random_seed: 0
+auto_resume: True
+master_port: "11321"
+model_file: "icvnet"
+model_name: "ICVNet"
+test_func_name: "test_model_stage"
+dataset: "dtu_yao_eval"
+max_depth: 4
+model_path: "ckpt/dtu.ckpt"
+img_mean: [0.5, 0.5, 0.5]
+img_std: [0.5, 0.5, 0.5]
+
+model:
+  is_stage: True
+  stage_num: 4
+  output_channels: [64, 32, 16, 8]
+  group_nums: [8, 8, 8, 4]
+  feat_name: "StageFeatExtNet"
+  use_3dbn: True
+  stage_info:
+    scale:
+      "0": 0.125
+      "1": 0.25
+      "2": 0.5
+      "3": 1.0
+    depth2stage:
+      "1": 0
+      "2": 1
+      "3": 2
+      "4": 3
+      "5": 3  # needed and invalid, just for checking
+
+test:
+  batch_size: 1
+  log_period: 20
+  test_metric: "thres1mm_accu"
+
+data:
+  num_workers: 4
+  test:
+    root_dir: "E:/datasets/MVS_TRANING/dtu"
+    num_view: 5
+    interval_scale: 0.8
+    num_depth: 256
+    listfile: "lists/dtu/test.txt"
+    out_scale: 1.0
+    self_norm: False
+    color_mode: null
+    with_gt: True
+    max_h: null
+    max_w: null
+    base_image_size: 64
+    is_clean: False
+    out_depths: "all" #[4]
+    prob_out_depths: [1, 2, 3, 4]
+    save_depths: [4]
+    prob_depth: 3
+
+#no_testing: True
+#no_fusion: True
+
+fusion:
+  name: "xy_filter_per"
+  xy_filter_per:
+    nprocs: null
+    global_pair: True
+    para_num: 1
+    para_tag: [0]
+    output_dir: "/mvs/test/dtu/ICV-Net/xy_filter"
+    scan1:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan4:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan9:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan10:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan11:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan12:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan13:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.75]
+      depth_thresh: [0.01]
+    scan15:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan23:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan24:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan29:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan32:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan33:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan34:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan48:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan49:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan62:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan75:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan77:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan110:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.25]
+      depth_thresh: [0.01]
+    scan114:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.5]
+      depth_thresh: [0.01]
+    scan118:
+      prob_threshold: [0.8]
+      num_consistent: [3]
+      img_dist_thresh: [0.75]
+      depth_thresh: [0.01]

@@ -1,0 +1,24 @@
+--install command: conda create -n mvs python=3.8
+Python==3.8
+
+--install command: conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
+torch==1.11.0+cu113
+torchvision==0.11.0+cu113
+torchaudio==0.11.0
+
+--install command: conda install tensorflow-gpu=2.6.0
+tensorboard-gpu==2.6.0
+
+--install command: pip install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu113/torch1.11/index.html
+mmcv-full==1.7.0
+
+--install command: pip install matplotlib==3.5.3
+matplotlib==3.5.3
+
+--install command: pip install numpy==1.21.5
+numpy==1.21.5
+
+pyyaml==6.0
+plyfile==0.9
+pillow==9.4.0
+
